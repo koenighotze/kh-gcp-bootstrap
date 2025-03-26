@@ -10,55 +10,51 @@ set -o pipefail
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 function service_account_exists() {
-  local project_id="$1"
-  local existing_sa
-  existing_sa=$(gcloud iam service-accounts list --project="$project_id" --format="value(name)")
+    local project_id="$1"
+    local existing_sa
+    existing_sa=$(gcloud iam service-accounts list --project="$project_id" --format="value(name)")
 
-  if [ -z "$existing_sa" ] 
-  then
-    return 1
-  else
-    return 0
-  fi
+    if [ -z "$existing_sa" ]; then
+        return 1
+    else
+        return 0
+    fi
 }
 
 function project_exists() {
-  local project_id="$1"
-  local existing_project
-  existing_project=$(gcloud projects list --filter=PROJECT_ID="$project_id" --format="value(PROJECT_ID)")
+    local project_id="$1"
+    local existing_project
+    existing_project=$(gcloud projects list --filter=PROJECT_ID="$project_id" --format="value(PROJECT_ID)")
 
-  if [ -z "$existing_project" ] 
-  then
-    return 1
-  else
-    return 0
-  fi
+    if [ -z "$existing_project" ]; then
+        return 1
+    else
+        return 0
+    fi
 }
 
 function bucket_exists() {
-  local bucket_name="$1"
-  local project="$2"
-  local existing_bucket
-  existing_bucket=$(gcloud storage buckets list --filter=name="$bucket_name" --format="value(name)" --project="$project")
+    local bucket_name="$1"
+    local project="$2"
+    local existing_bucket
+    existing_bucket=$(gcloud storage buckets list --filter=name="$bucket_name" --format="value(name)" --project="$project")
 
-  if [ -z "$existing_bucket" ] 
-  then
-    return 1
-  else
-    return 0
-  fi
+    if [ -z "$existing_bucket" ]; then
+        return 1
+    else
+        return 0
+    fi
 }
 
 function create_project() {
-  local projectId="$1"
+    local projectId="$1"
 
-  echo "Creating project $projectId"
+    echo "Creating project $projectId"
 
-  if project_exists "$projectId"
-  then
-      echo "Project $projectId already exists, will not create"
-  else
-      display_name=$(echo "Koenighotze $projectId" | cut -c 1-30)
-      gcloud projects create "${projectId}" --name="$display_name"
-  fi
+    if project_exists "$projectId"; then
+        echo "Project $projectId already exists, will not create"
+    else
+        display_name=$(echo "Koenighotze $projectId" | cut -c 1-30)
+        gcloud projects create "${projectId}" --name="$display_name"
+    fi
 }

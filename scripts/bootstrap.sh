@@ -25,7 +25,7 @@ function main() {
 
     create_seed_project "$full_seed_project_name"
 
-    enable_billing "$full_seed_project_name" "$billing_account" 
+    enable_billing "$full_seed_project_name" "$billing_account"
 
     create_tf_state_bucket "$full_seed_project_name" "$region" "$tf_state_bucket"
 
@@ -43,13 +43,12 @@ function create_seed_project() {
 
     echo "Creating seed project $project"
 
-    if project_exists "$project"
-    then
+    if project_exists "$project"; then
         echo "Project $project already exists, will not create"
-        
+
         return
     fi
-    
+
     # since Terraform cannot create projects without an organization,
     # we use gcloud cli for the time being
     gcloud projects create "$project" --name="Koenighotze Seed" --labels=purpose=seed
@@ -62,10 +61,9 @@ function create_tf_state_bucket() {
 
     echo "Creating Terraform state bucket for $project in region $region"
 
-    if bucket_exists "$tf_state_bucket" "$project"
-    then
+    if bucket_exists "$tf_state_bucket" "$project"; then
         echo "Bucket $tf_state_bucket already exists in project $project, will not create"
-        
+
         return
     fi
 
@@ -104,8 +102,7 @@ function enable_billing() {
 function create_secrets_vault() {
     local vault_name=$1
 
-    if vault_exists "$vault_name"
-    then
+    if vault_exists "$vault_name"; then
         echo "Vault $vault_name already exists, will not create"
         return 0
     fi
@@ -123,18 +120,19 @@ function add_secrets_to_vault() {
     local item_title="kh-gcp-bootstrap"
 
     echo "Adding items to 1Password vault $vault_name"
-    archive_item_if_exists "$vault_name"  "$item_title" 
-    
+    archive_item_if_exists "$vault_name" "$item_title"
+
     op item create \
-            --vault "$vault_name" \
-            --category=login \
-            --title="$item_title" \
-            seed_repository="$seed_repository" \
-            seed_project_name="$seed_project_name" \
-            gcp_billing_account_id="$billing_account_id" \
-            gcp_resource_postfix="$postfix" 
+        --vault "$vault_name" \
+        --category=login \
+        --title="$item_title" \
+        seed_repository="$seed_repository" \
+        seed_project_name="$seed_project_name" \
+        gcp_billing_account_id="$billing_account_id" \
+        gcp_resource_postfix="$postfix"
 
     echo "Items successfully added to vault $vault_name"
 }
 
+# shellcheck disable=SC2153
 main "$SEED_PROJECT_NAME" "$POSTFIX" "$DEFAULT_REGION" "$BILLING_ACCOUNT" "$SEED_REPOSITORY_NAME" "$ONEPW_VAULT_NAME"
