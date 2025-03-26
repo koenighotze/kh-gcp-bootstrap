@@ -14,13 +14,12 @@ source "$(dirname "$0")/gcp-functions.sh"
 source "$(dirname "$0")/1pw-functions.sh"
 
 function main() {
-    local seed_project_name=$1
+    local full_seed_project_name=$1
     local postfix=$2
     local region=$3
     local billing_account=$4
     local seed_repository=$5
     local onepw_vault_name=$6
-    local full_seed_project_name="${seed_project_name}-${postfix}"
     local tf_state_bucket="${full_seed_project_name}-tf-state"
 
     create_seed_project "$full_seed_project_name"
@@ -127,7 +126,7 @@ function add_secrets_to_vault() {
         --category=login \
         --title="$item_title" \
         seed_repository="$seed_repository" \
-        seed_project_name="$seed_project_name" \
+        seed_project_name="$full_seed_project_name" \
         gcp_billing_account_id="$billing_account_id" \
         gcp_resource_postfix="$postfix"
 
@@ -135,4 +134,4 @@ function add_secrets_to_vault() {
 }
 
 # shellcheck disable=SC2153
-main "$SEED_PROJECT_NAME" "$POSTFIX" "$DEFAULT_REGION" "$BILLING_ACCOUNT" "$SEED_REPOSITORY_NAME" "$ONEPW_VAULT_NAME"
+main "${SEED_PROJECT_NAME}-${POSTFIX}" "$POSTFIX" "$DEFAULT_REGION" "$BILLING_ACCOUNT" "$SEED_REPOSITORY_NAME" "$ONEPW_VAULT_NAME"
