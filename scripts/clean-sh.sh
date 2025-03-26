@@ -10,3 +10,4 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 shellcheck scripts/*
 shfmt -i 4 -w scripts/
+beautysh -s fnpar scripts/*

@@ -15,11 +15,11 @@ function confirm() {
     # call with a prompt string or use a default
     read -r -p "${1:-$message} [y/N]?" response
     case "$response" in
-    [yY][eE][sS] | [yY])
-        true
-        ;;
-    *)
-        false
-        ;;
+        [yY][eE][sS] | [yY])
+            true
+            ;;
+        *)
+            false
+            ;;
     esac
 }
