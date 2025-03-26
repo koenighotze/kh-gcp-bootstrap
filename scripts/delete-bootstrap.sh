@@ -24,7 +24,7 @@ function delete_seed_project() {
         return
     fi
 
-    echo gcloud projects delete "$full_seed_project_name" 
+    echo gcloud projects delete "$full_seed_project_name"
 }
 
 function delete_tf_state_bucket() {
@@ -39,7 +39,7 @@ function delete_tf_state_bucket() {
         return
     fi
 
-    gcloud storage buckets delete "gs://${tf_state_bucket}" --project "$full_seed_project_name" 
+    gcloud storage buckets delete "gs://${tf_state_bucket}" --project "$full_seed_project_name"
 }
 
 function delete_github_secrets() {
@@ -88,7 +88,7 @@ function main() {
     local tf_state_bucket="${full_seed_project_name}-tf-state"
 
     echo "WARNING: This will remove everything from the baseline"
-    confirm
+    confirm || exit
 
     remove_secrets_from_vault "$onepw_vault_name"
 
@@ -101,4 +101,5 @@ function main() {
     echo "Finished cleanup of $full_seed_project_name"
 }
 
+# shellcheck disable=SC2153
 main "$SEED_PROJECT_NAME" "$POSTFIX" "$DEFAULT_REGION" "$BILLING_ACCOUNT" "$SEED_REPOSITORY_NAME" "$ONEPW_VAULT_NAME"
