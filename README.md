@@ -5,4 +5,8 @@
 This repository contains everything not setup via Terraform.
 
 - seed project
+- seed service account
 - downstream projects
+  - kh-gcp-seed
+  - kh-gcp-platform (TODO)
+  - kh-gcp-network (TODO)
