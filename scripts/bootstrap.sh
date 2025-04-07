@@ -116,6 +116,7 @@ function add_secrets_to_vault() {
     local full_seed_project_name=$3
     local billing_account_id=$4
     local postfix=$5
+    local seed_project_tf_state_bucket_name=$6
     local item_title="kh-gcp-bootstrap"
 
     echo "Adding items to 1Password vault $vault_name"
@@ -128,7 +129,8 @@ function add_secrets_to_vault() {
         seed_repository="$seed_repository" \
         seed_project_name="$full_seed_project_name" \
         gcp_billing_account_id="$billing_account_id" \
-        gcp_resource_postfix="$postfix"
+        gcp_resource_postfix="$postfix" \
+        seed_project_tf_state_bucket_name="$seed_project_tf_state_bucket_name"
 
     echo "Items successfully added to vault $vault_name"
 }

@@ -46,15 +46,25 @@ function bucket_exists() {
     fi
 }
 
-function create_project() {
-    local projectId="$1"
+function create_project_unless_exists() {
+    local project_id="$1"
 
-    echo "Creating project $projectId"
+    echo "Creating project $project_id"
 
-    if project_exists "$projectId"; then
-        echo "Project $projectId already exists, will not create"
+    if project_exists "$project_id"; then
+        echo "Project $project_id already exists, will not create"
     else
-        display_name=$(echo "Koenighotze $projectId" | cut -c 1-30)
-        gcloud projects create "${projectId}" --name="$display_name"
+        display_name=$(echo "Koenighotze $project_id" | cut -c 1-30)
+
+        gcloud projects create "${project_id}" --name="$display_name"
     fi
+}
+
+function enable_billing() {
+    local project_id="$1"
+    local billing_account="$2"
+
+    echo "Enabling billing account $billing_account for project $project_id"
+
+    gcloud beta billing projects link "${project_id}" --billing-account="${billing_account}"
 }
