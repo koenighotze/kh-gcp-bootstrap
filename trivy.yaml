@@ -1,0 +1,27 @@
+config: trivy.yaml
+debug: false
+exit-code: 1
+format: table
+generate-default-config: false
+ignore-policy: ""
+ignore-unfixed: false
+ignorefile: .trivyignore
+insecure: false
+kubernetes:
+    k8s-version: ""
+misconfiguration:
+    include-non-failures: false
+    scanners:
+        - dockerfile
+        - terraform
+    terraform:
+        exclude-downloaded-modules: false
+quiet: false
+report: all
+severity:
+    - UNKNOWN
+    - LOW
+    - MEDIUM
+    - HIGH
+    - CRITICAL
+timeout: 1m0s
