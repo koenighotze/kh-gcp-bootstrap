@@ -26,6 +26,8 @@ function main() {
 
     enable_billing "$full_seed_project_name" "$billing_account"
 
+    enable_services "$full_seed_project_name"
+
     create_tf_state_bucket "$full_seed_project_name" "$region" "$tf_state_bucket"
 
     setup_github_secrets "$seed_repository" "$full_seed_project_name" "$billing_account" "$postfix" "$tf_state_bucket"
@@ -51,6 +53,21 @@ function create_seed_project() {
     # since Terraform cannot create projects without an organization,
     # we use gcloud cli for the time being
     gcloud projects create "$project" --name="Koenighotze Seed" --labels=purpose=seed
+}
+
+# Enable required services for the seed project
+function enable_services() {
+    local project=$1
+
+    echo "Enabling required services"
+
+    # needed to impersonate service accounts
+    gcloud services enable --project="$project" iamcredentials.googleapis.com 
+    gcloud services enable --project="$project" cloudresourcemanager.googleapis.com
+    # gcloud services enable --project="$project" cloudbilling.googleapis.com
+    # gcloud services enable --project="$project" billingbudgets.googleapis.com
+    # gcloud services enable --project="$project" iam.googleapis.com
+
 }
 
 function create_tf_state_bucket() {
