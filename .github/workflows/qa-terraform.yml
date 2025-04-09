@@ -1,0 +1,50 @@
+name: QA Terraform
+
+on:
+  push:
+    paths-ignore:
+      - "scripts/**"
+    branches: ["main"]
+    tags-ignore: ["**"]
+  workflow_dispatch:
+
+env:
+  TF_IN_AUTOMATION: true
+  TF_INPUT: false
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Security scan
+        uses: aquasecurity/trivy-action@0.30.0
+        with:
+          scan-type: config
+          trivy-config: trivy.yaml
+          ignore-unfixed: false
+
+  compliance-scan:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@v12.1347.0
+
+  lint:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setting up TFLint
+        with:
+          tflint_version: v0.56.0
+      - name: Initializing TFLint
+        run: tflint --init
+      - name: Linting
+        run: tflint -f compact --disable-rule=terraform_module_pinned_source
