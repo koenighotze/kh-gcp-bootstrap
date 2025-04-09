@@ -1,6 +1,7 @@
 # GCP Bootstrap
 
-[![QA](https://github.com/koenighotze/kh-gcp-bootstrap/actions/workflows/qa.yml/badge.svg)](https://github.com/koenighotze/kh-gcp-bootstrap/actions/workflows/qa.yml)
+[![QA for Scripts](https://github.com/koenighotze/kh-gcp-bootstrap/actions/workflows/qa-scripts.yml/badge.svg)](https://github.com/koenighotze/kh-gcp-bootstrap/actions/workflows/qa-scripts.yml)
+[![QA Terraform](https://github.com/koenighotze/kh-gcp-bootstrap/actions/workflows/qa-terraform.yml/badge.svg)](https://github.com/koenighotze/kh-gcp-bootstrap/actions/workflows/qa-terraform.yml)
 
 This repository contains everything not setup via Terraform.
 

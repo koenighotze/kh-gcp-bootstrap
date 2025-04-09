@@ -5,6 +5,8 @@ locals {
   ]
 }
 
+# checkov:skip=CKV_GIT_4:Not a real secret
+# checkov:skip=CKV_SECRET_6:Not a real secret
 resource "github_actions_secret" "workload_identity_pool_name" {
   repository      = var.seed_repository_name
   secret_name     = "WORKLOAD_IDENTITY_PROVIDER_NAME"
