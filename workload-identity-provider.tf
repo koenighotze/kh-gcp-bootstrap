@@ -3,7 +3,6 @@ data "github_user" "koenighotze" {
 }
 
 #checkov:skip=CKV_GCP_118:Skip
-#checkov:skip=CKV_GCP_125:Skip
 resource "google_iam_workload_identity_pool_provider" "github_provider" {
   workload_identity_pool_id          = google_iam_workload_identity_pool.github_pool.workload_identity_pool_id
   workload_identity_pool_provider_id = "github-provider-${random_integer.rand.result}"
