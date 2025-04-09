@@ -1,11 +1,11 @@
 output "github_workload_identity_pool_name" {
-  value = module.workload-identity.github_pool.name
+  value = google_iam_workload_identity_pool.github_pool.name
 }
 
 output "github_workload_identity_pool_provider_id" {
-  value = module.workload-identity.github_provider.id
+  value = google_iam_workload_identity_pool_provider.github_provider.id
 }
 
 output "github_workload_identity_pool_provider_name" {
-  value = module.workload-identity.github_provider.name
+  value = google_iam_workload_identity_pool_provider.github_provider.name
 }
