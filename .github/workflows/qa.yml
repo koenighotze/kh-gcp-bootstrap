@@ -16,3 +16,6 @@ jobs:
         uses: ludeeus/action-shellcheck@2.0.0
         with:
           severity: info
+          scandir: "./scripts"
+        env:
+          SHELLCHECK_OPTS: -e SC1091
