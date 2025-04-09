@@ -5,7 +5,7 @@ variable "seed_project_id" {
 
 variable "seed_repository_name" {
   type        = string
-  description = "Name of the repository for workload identity, e.g., koenighotze/kh-gcp-seed"
+  description = "Name of the repository for workload identity, e.g., kh-gcp-seed"
 }
 
 variable "seed_project_admin_service_account_id" {
