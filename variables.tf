@@ -25,11 +25,6 @@ variable "seed_repository_name" {
   description = "Name of the repository for workload identity, e.g., koenighotze/kh-gcp-seed"
 }
 
-variable "seed_project_admin_service_account_id" {
-  type    = string
-  default = "Id of the seed project's admin service account"
-}
-
 variable "github_username" {
   type        = string
   description = "GitHub username of the user who will be using the workload identity"
