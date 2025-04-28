@@ -13,7 +13,7 @@ resource "github_actions_secret" "workload_identity_pool_name" {
 
 resource "google_service_account_iam_binding" "workload_identity_bindings" {
   for_each           = toset(local.roles)
-  service_account_id = data.google_service_account.seed_service_account.id
+  service_account_id = google_service_account.seed_service_account.id
   role               = each.value
   members = [
     "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github_pool.name}/attribute.repository/${var.github_username}/${var.seed_repository_name}"
