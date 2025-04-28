@@ -12,9 +12,11 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 source "$(dirname "$0")/common.sh"
 source "$(dirname "$0")/support-functions.sh"
 
-confirm "Really delete the service account $SEED_SA_EMAIL_ADDRESS in project $FULL_SEED_PROJECT_NAME?" || exit
+echo "Seed SA is setup using Terraform!"
+exit
+# confirm "Really delete the service account $SEED_SA_EMAIL_ADDRESS in project $FULL_SEED_PROJECT_NAME?" || exit
 
-# this needs to be refactored once I have an organization
-gcloud iam service-accounts delete "$SEED_SA_EMAIL_ADDRESS" --project "$FULL_SEED_PROJECT_NAME"
+# # this needs to be refactored once I have an organization
+# gcloud iam service-accounts delete "$SEED_SA_EMAIL_ADDRESS" --project "$FULL_SEED_PROJECT_NAME"
 
-gh secret delete SEED_SA_EMAIL_ADDRESS -R "${SEED_REPOSITORY_NAME}" || echo "Secret SEED_SA_EMAIL_ADDRESS does not exist or could not be deleted."
+# gh secret delete SEED_SA_EMAIL_ADDRESS -R "${SEED_REPOSITORY_NAME}" || echo "Secret SEED_SA_EMAIL_ADDRESS does not exist or could not be deleted."

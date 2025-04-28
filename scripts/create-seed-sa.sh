@@ -81,4 +81,6 @@ function create_seed_sa() {
 }
 
 # shellcheck disable=SC2153
-main "${SEED_PROJECT_NAME}-${POSTFIX}" "${SEED_SA_ID}" "$SEED_REPOSITORY_NAME" "$BILLING_ACCOUNT" "$SEED_SA_EMAIL_ADDRESS"
+# main "${SEED_PROJECT_NAME}-${POSTFIX}" "${SEED_SA_ID}" "$SEED_REPOSITORY_NAME" "$BILLING_ACCOUNT" "$SEED_SA_EMAIL_ADDRESS"
+
+echo "Seed SA is setup using Terraform!"
