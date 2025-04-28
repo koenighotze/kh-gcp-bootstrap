@@ -112,7 +112,7 @@ function enable_billing() {
 
     echo "Enabling billing for $project with billing account $billingAccount"
 
-    gcloud beta billing projects link "$project" --billing-account "$billingAccount"
+    gcloud billing projects link "$project" --billing-account "$billingAccount"
 }
 
 function create_secrets_vault() {

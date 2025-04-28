@@ -12,6 +12,7 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 source "$(dirname "$0")/common.sh"
 source "$(dirname "$0")/gcp-functions.sh"
 gcloud config set project "$FULL_SEED_PROJECT_NAME"
+gcloud auth application-default set-quota-project "$FULL_SEED_PROJECT_NAME"
 
 # TODO reduce duplication with create-projects.sh
 SEED_PROJECT_TF_STATE_BUCKET_NAME="${FULL_SEED_PROJECT_NAME}-tf-state"
