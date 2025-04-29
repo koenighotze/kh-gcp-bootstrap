@@ -11,16 +11,16 @@ locals {
       ]
     }
 
-    # "platform" = {
-    #   // List of extra APIs to be enabled for the project
-    #   extra_apis = [
-    #     "artifactregistry.googleapis.com",
-    #   ]
+    "platform" = {
+      // List of extra APIs to be enabled for the project
+      extra_apis = [
+        "artifactregistry.googleapis.com",
+      ]
 
-    #   // List of extra roles to be assigned to the service account for the project
-    #   extra_roles = [
-    #     "roles/artifactregistry.admin",
-    #   ]
-    # }
+      // List of extra roles to be assigned to the service account for the project
+      extra_roles = [
+        "roles/artifactregistry.admin",
+      ]
+    }
   }
 }
