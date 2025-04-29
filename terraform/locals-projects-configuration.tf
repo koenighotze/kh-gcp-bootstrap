@@ -6,8 +6,6 @@ locals {
       extra_roles = [
         "roles/iam.serviceAccountCreator",
         "roles/iam.serviceAccountDeleter",
-        "roles/storage.admin",
-        "roles/storage.objectAdmin",
       ]
     }
 
@@ -20,7 +18,6 @@ locals {
       // List of extra roles to be assigned to the service account for the project
       extra_roles = [
         "roles/artifactregistry.admin",
-        "roles/storage.objectAdmin",
       ]
     }
   }

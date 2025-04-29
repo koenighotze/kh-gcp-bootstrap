@@ -1,10 +1,3 @@
-locals {
-  roles = [
-    "roles/iam.workloadIdentityUser",
-    "roles/iam.serviceAccountTokenCreator"
-  ]
-}
-
 resource "github_actions_secret" "workload_identity_pool_name" {
   repository      = var.seed_repository_name
   secret_name     = "WORKLOAD_IDENTITY_PROVIDER_NAME"
@@ -12,7 +5,10 @@ resource "github_actions_secret" "workload_identity_pool_name" {
 }
 
 resource "google_service_account_iam_binding" "workload_identity_bindings" {
-  for_each           = toset(local.roles)
+  for_each = toset([
+    "roles/iam.workloadIdentityUser",
+    "roles/iam.serviceAccountTokenCreator"
+  ])
   service_account_id = google_service_account.seed_service_account.id
   role               = each.value
   members = [
