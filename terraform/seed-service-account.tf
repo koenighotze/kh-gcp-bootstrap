@@ -4,23 +4,6 @@ resource "google_service_account" "seed_service_account" {
   display_name = "Seed account for Koenighotze"
 }
 
-locals {
-  seed_project_roles = [
-    "roles/iam.serviceAccountCreator",
-    "roles/iam.serviceAccountDeleter",
-    "roles/storage.admin",
-    "roles/storage.objectAdmin"
-  ]
-}
-
-resource "google_project_iam_member" "seed_sa_project_roles" {
-  for_each = toset(local.seed_project_roles)
-
-  project = var.seed_project_id
-  role    = each.value
-  member  = "serviceAccount:${google_service_account.seed_service_account.email}"
-}
-
 resource "google_billing_account_iam_member" "seed_sa_billing_role" {
   billing_account_id = data.google_billing_account.billing_account.id
   role               = "roles/billing.admin"

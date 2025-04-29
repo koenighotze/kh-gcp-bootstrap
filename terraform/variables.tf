@@ -9,6 +9,11 @@ variable "billing_account_id" {
   default     = "011CC2-3475B8-FC57E1"
 }
 
+variable "postfix" {
+  type        = string
+  description = "Postfix to be added to the project name"
+}
+
 variable "seed_project_id" {
   type        = string
   description = "Id of the project where the seed resources will be deployed"
