@@ -24,6 +24,7 @@ jobs:
           scan-type: config
           trivy-config: trivy.yaml
           ignore-unfixed: false
+          scan-ref: terraform/
 
   compliance-scan:
     runs-on: ubuntu-24.04
@@ -35,6 +36,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@v12
         with:
+          directory: terraform/
           skip_check: CKV_GIT_4,CKV_SECRET_6,CKV_GCP_125
           quiet: true
           framework: terraform
@@ -51,4 +53,4 @@ jobs:
       - name: Initializing TFLint
         run: tflint --init
       - name: Linting
-        run: tflint -f compact --disable-rule=terraform_module_pinned_source
+        run: tflint --chdir=terraform/--recursive -f compact --disable-rule=terraform_module_pinned_source

@@ -11,4 +11,5 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 PROJECTS=(
     "platform"
+    "go-playground"
 )
