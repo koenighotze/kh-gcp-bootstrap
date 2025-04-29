@@ -20,6 +20,7 @@ locals {
       // List of extra roles to be assigned to the service account for the project
       extra_roles = [
         "roles/artifactregistry.admin",
+        "roles/storage.objectAdmin",
       ]
     }
   }
