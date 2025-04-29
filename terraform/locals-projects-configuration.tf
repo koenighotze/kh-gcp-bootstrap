@@ -1,5 +1,4 @@
 locals {
-  // Define a map of default projects with their associated APIs and roles
   projects = {
     "kh-gcp-seed" = {
       extra_apis = []
@@ -10,14 +9,20 @@ locals {
     }
 
     "platform" = {
-      // List of extra APIs to be enabled for the project
       extra_apis = [
         "artifactregistry.googleapis.com",
       ]
 
-      // List of extra roles to be assigned to the service account for the project
       extra_roles = [
         "roles/artifactregistry.admin",
+      ]
+    }
+
+    "go-playground" = {
+      extra_apis = [
+      ]
+
+      extra_roles = [
       ]
     }
   }
