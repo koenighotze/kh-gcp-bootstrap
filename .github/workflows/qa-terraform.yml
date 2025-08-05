@@ -53,4 +53,4 @@ jobs:
       - name: Initializing TFLint
         run: tflint --init
       - name: Linting
-        run: tflint --chdir=terraform/--recursive -f compact --disable-rule=terraform_module_pinned_source
+        run: tflint --chdir=terraform/ --recursive -f compact --disable-rule=terraform_module_pinned_source
