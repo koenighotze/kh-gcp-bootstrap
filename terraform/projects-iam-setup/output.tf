@@ -3,9 +3,9 @@ output "seed_project_roles" {
 }
 
 output "google_project_iam_members" {
-  value = google_project_iam_member.project_iam_member.*
+  value = values(google_project_iam_member.project_iam_member)
 }
 
-output "googoogle_project_services" {
-  value = google_project_service.additional_apis.*
+output "google_project_services" {
+  value = values(google_project_service.additional_apis)
 }
