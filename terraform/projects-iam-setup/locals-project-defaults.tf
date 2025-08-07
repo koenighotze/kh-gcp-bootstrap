@@ -1,8 +1,8 @@
 locals {
-  default_labels = {
-    purpose = "koenighotze"
-    owner   = "koenighotze"
-  }
+  # default_labels = {
+  #   purpose = "koenighotze"
+  #   owner   = "koenighotze"
+  # }
 
   common_apis = [
     "iam.googleapis.com",
