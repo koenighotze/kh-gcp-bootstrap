@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Security scan
         uses: aquasecurity/trivy-action@0.32.0
         with:
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Run Checkov action
         id: checkov
         uses: bridgecrewio/checkov-action@v12
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: terraform-linters/setup-tflint@v4
         name: Setting up TFLint
         with:
