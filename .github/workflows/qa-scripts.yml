@@ -5,6 +5,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "scripts/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "scripts/**"
 
 jobs:
   shellcheck:
@@ -19,3 +26,5 @@ jobs:
           scandir: "./scripts"
         env:
           SHELLCHECK_OPTS: -e SC1091
+      - name: Check shell formatting
+        run: shfmt -d scripts/

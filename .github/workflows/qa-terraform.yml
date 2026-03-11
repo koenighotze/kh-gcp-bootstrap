@@ -6,11 +6,16 @@ on:
       - "scripts/**"
     branches: ["main"]
     tags-ignore: ["**"]
+  pull_request:
+    branches: ["main"]
+    paths-ignore:
+      - "scripts/**"
   workflow_dispatch:
 
 env:
   TF_IN_AUTOMATION: true
   TF_INPUT: false
+  TFLINT_VERSION: v0.56.0
 
 jobs:
   security-scan:
@@ -49,8 +54,22 @@ jobs:
       - uses: terraform-linters/setup-tflint@v5
         name: Setting up TFLint
         with:
-          tflint_version: v0.56.0
+          tflint_version: ${{ env.TFLINT_VERSION }}
       - name: Initializing TFLint
         run: tflint --init
       - name: Linting
         run: tflint --chdir=terraform/ --recursive -f compact --disable-rule=terraform_module_pinned_source
+
+  validate:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: hashicorp/setup-terraform@v3
+        name: Setting up Terraform
+      - name: Format check
+        run: terraform fmt -check -recursive terraform/
+      - name: Init (no backend)
+        run: terraform -chdir=terraform/ init -backend=false
+      - name: Validate
+        run: terraform -chdir=terraform/ validate -no-color
