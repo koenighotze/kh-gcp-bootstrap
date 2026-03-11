@@ -2,6 +2,10 @@ resource "google_service_account" "seed_service_account" {
   project      = var.seed_project_id
   account_id   = var.seed_sa_id
   display_name = "Seed account for Koenighotze"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "google_billing_account_iam_member" "seed_sa_billing_role" {
