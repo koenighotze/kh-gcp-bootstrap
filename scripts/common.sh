@@ -13,12 +13,7 @@ source "$(dirname "$0")/local.sh"
 
 # some random id to make projects and other resources unique, but grouped
 POSTFIX="13bf3f03"
-
-# BILLING_ACCOUNT must be set in scripts/local.sh (see local.sh.example)
-if [[ -z "${BILLING_ACCOUNT:-}" ]]; then
-    echo "Error: BILLING_ACCOUNT is not set. Define it in scripts/local.sh." >&2
-    exit 1
-fi
+BILLING_ACCOUNT=$(gcloud billing accounts list --filter="displayName=DSchmitz-Training-Billing" --format="value(name)")
 
 # GCP setup
 DEFAULT_REGION=europe-west3
