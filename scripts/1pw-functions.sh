@@ -1,4 +1,4 @@
-#\!/usr/bin/env bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2155
 
 function vault_exists() {

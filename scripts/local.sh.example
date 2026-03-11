@@ -1,4 +1,4 @@
-#\!/usr/bin/env bash
+#!/usr/bin/env bash
 # shellcheck disable=SC2034
 # Local overrides for common.sh — copy this file to local.sh and fill in your values.
 # local.sh is gitignored and never committed.

@@ -1,4 +1,4 @@
-#\!/usr/bin/env bash
+#!/usr/bin/env bash
 # shellcheck disable=SC1091
 # when a command fails, bash exits instead of continuing with the rest of the script
 set -o errexit
@@ -79,9 +79,8 @@ function main() {
     local seed_project_name=$1
     local postfix=$2
     local region=$3
-    local billing_account=$4
-    local seed_repository=$5
-    local onepw_vault_name=$6
+    local seed_repository=$4
+    local onepw_vault_name=$5
     local full_seed_project_name="${seed_project_name}-${postfix}"
     local tf_state_bucket="${full_seed_project_name}-tf-state"
 
@@ -101,4 +100,4 @@ function main() {
 }
 
 # shellcheck disable=SC2153
-main "$SEED_PROJECT_NAME" "$POSTFIX" "$DEFAULT_REGION" "$BILLING_ACCOUNT" "$SEED_REPOSITORY_NAME" "$ONEPW_VAULT_NAME"
+main "$SEED_PROJECT_NAME" "$POSTFIX" "$DEFAULT_REGION" "$SEED_REPOSITORY_NAME" "$ONEPW_VAULT_NAME"

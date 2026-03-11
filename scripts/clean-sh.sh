@@ -1,4 +1,4 @@
-#\!/usr/bin/env bash
+#!/usr/bin/env bash
 # when a command fails, bash exits instead of continuing with the rest of the script
 set -o errexit
 # make the script fail, when accessing an unset variable
