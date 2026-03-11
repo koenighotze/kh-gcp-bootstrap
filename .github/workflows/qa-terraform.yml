@@ -65,7 +65,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: hashicorp/setup-terraform@v3
+      - uses: hashicorp/setup-terraform@v4
         name: Setting up Terraform
       - name: Format check
         run: terraform fmt -check -recursive terraform/
