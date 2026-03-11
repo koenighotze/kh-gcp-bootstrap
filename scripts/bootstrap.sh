@@ -94,7 +94,7 @@ function setup_github_secrets() {
     local tf_state_bucket=$5
 
     if ! gh repo view "$seed_repository" >/dev/null 2>&1; then
-        echo "Error: Repository $seed_repository does not exist. Exiting."
+        echo "Error: Repository $seed_repository does not exist. Exiting." >&2
         exit 1
     fi
 
@@ -104,15 +104,6 @@ function setup_github_secrets() {
     gh secret set GCP_BILLING_ACCOUNT_ID -R "$seed_repository" -b "$billing_account"
     gh secret set GCP_RESOURCE_POSTFIX -R "$seed_repository" -b "$postfix"
     gh secret set TERRAFORM_STATE_BUCKET -R "$seed_repository" -b "$tf_state_bucket"
-}
-
-function enable_billing() {
-    local project=$1
-    local billingAccount=$2
-
-    echo "Enabling billing for $project with billing account $billingAccount"
-
-    gcloud billing projects link "$project" --billing-account "$billingAccount"
 }
 
 function create_secrets_vault() {

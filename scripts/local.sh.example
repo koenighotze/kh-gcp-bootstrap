@@ -1,0 +1,11 @@
+#\!/usr/bin/env bash
+# shellcheck disable=SC2034
+# Local overrides for common.sh — copy this file to local.sh and fill in your values.
+# local.sh is gitignored and never committed.
+
+# Your GCP billing account ID — retrieve with:
+#   gcloud billing accounts list --format="value(name)"
+# BILLING_ACCOUNT="ABCDEF-123456-GHIJKL"
+
+# Uncomment and set to override the resource postfix defined in common.sh:
+# POSTFIX="your-postfix"

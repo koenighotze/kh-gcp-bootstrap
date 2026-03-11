@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#\!/usr/bin/env bash
 # shellcheck disable=SC1091,SC2034
 # when a command fails, bash exits instead of continuing with the rest of the script
 set -o errexit
@@ -13,8 +13,14 @@ source "$(dirname "$0")/local.sh"
 
 # some random id to make projects and other resources unique, but grouped
 POSTFIX="13bf3f03"
-BILLING_ACCOUNT=$(gcloud billing accounts list --filter="displayName=DSchmitz-Training-Billing" --format="value(name)")
 
+# BILLING_ACCOUNT must be set in scripts/local.sh (see local.sh.example)
+if [[ -z "${BILLING_ACCOUNT:-}" ]]; then
+    echo "Error: BILLING_ACCOUNT is not set. Define it in scripts/local.sh." >&2
+    exit 1
+fi
+
+# GCP setup
 DEFAULT_REGION=europe-west3
 SEED_PROJECT_NAME="kh-gcp-seed"
 FULL_SEED_PROJECT_NAME="${SEED_PROJECT_NAME}-${POSTFIX}"
@@ -23,3 +29,4 @@ SEED_SA_ID=koenighotze-seed-sa
 SEED_SA_EMAIL_ADDRESS="${SEED_SA_ID}@${FULL_SEED_PROJECT_NAME}.iam.gserviceaccount.com"
 
 ONEPW_VAULT_NAME="kh-development"
+TF_STATE_BUCKET_NAME="${FULL_SEED_PROJECT_NAME}-tf-state"

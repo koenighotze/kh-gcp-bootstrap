@@ -11,19 +11,19 @@ if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
 source "$(dirname "$0")/common.sh"
 source "$(dirname "$0")/gcp-functions.sh"
-gcloud config set project "$FULL_SEED_PROJECT_NAME"
+
+# Scope the active project to this script only — avoids mutating global gcloud config
+export CLOUDSDK_CORE_PROJECT="$FULL_SEED_PROJECT_NAME"
 gcloud auth application-default set-quota-project "$FULL_SEED_PROJECT_NAME"
 
-# TODO reduce duplication with create-projects.sh
-SEED_PROJECT_TF_STATE_BUCKET_NAME="${FULL_SEED_PROJECT_NAME}-tf-state"
 # we assume gcloud to be downloaded and initialized
 # gcloud init
 # gcloud auth application-default login
 
-echo "Check if $SEED_PROJECT_TF_STATE_BUCKET_NAME exists"
-if bucket_exists "$SEED_PROJECT_TF_STATE_BUCKET_NAME" "$FULL_SEED_PROJECT_NAME"; then
-    terraform init -backend-config="bucket=$SEED_PROJECT_TF_STATE_BUCKET_NAME" "$@"
+echo "Check if $TF_STATE_BUCKET_NAME exists"
+if bucket_exists "$TF_STATE_BUCKET_NAME" "$FULL_SEED_PROJECT_NAME"; then
+    terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" "$@"
 else
-    echo "Missing bucket '$SEED_PROJECT_TF_STATE_BUCKET_NAME'; cannot initialize backend"
-    exit 1 
+    echo "Missing bucket '$TF_STATE_BUCKET_NAME'; cannot initialize backend"
+    exit 1
 fi
