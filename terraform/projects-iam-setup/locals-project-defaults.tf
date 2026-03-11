@@ -1,9 +1,4 @@
 locals {
-  default_labels = {
-    managed-by  = "terraform"
-    environment = "bootstrap"
-  }
-
   common_apis = [
     "iam.googleapis.com",
     "cloudbilling.googleapis.com",
