@@ -1,8 +1,8 @@
 locals {
-  # default_labels = {
-  #   purpose = "koenighotze"
-  #   owner   = "koenighotze"
-  # }
+  default_labels = {
+    managed-by  = "terraform"
+    environment = "bootstrap"
+  }
 
   common_apis = [
     "iam.googleapis.com",
@@ -10,10 +10,11 @@ locals {
     "cloudresourcemanager.googleapis.com",
   ]
 
-  # which common roles should the seed service account have in the child project.
-  # these roles are needed to setup downstream resources.
+  # Roles granted to the seed SA in every child project.
+  # Principle of least privilege: storage.admin removed (redundant with objectAdmin for object-level access).
+  # iam.serviceAccountAdmin is required for creating/deleting downstream SAs.
+  # resourcemanager.projectIamAdmin is required for granting roles in child projects via Terraform.
   common_roles = [
-    "roles/storage.admin",
     "roles/storage.objectAdmin",
     "roles/iam.serviceAccountAdmin",
     "roles/serviceusage.serviceUsageAdmin",
