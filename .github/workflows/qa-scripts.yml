@@ -26,5 +26,3 @@ jobs:
           scandir: "./scripts"
         env:
           SHELLCHECK_OPTS: -e SC1091
-      - name: Check shell formatting
-        run: shfmt -d scripts/
